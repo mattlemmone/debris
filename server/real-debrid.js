@@ -31,16 +31,15 @@ var path = {
     }
 };
 
-var downloadPath = '';
-var torrentPath = '';
-var streamInfoPath = ''
-
 var RealDebrid = {
     downloads: {},
     streaming: {},
     torrents: {},
     unrestrict: {}
 };
+
+var Web = {};
+
 
 /* Downloads */
 RealDebrid.downloads.getAll = function() {
@@ -189,7 +188,9 @@ RealDebrid.unrestrict.getLink(_link) = function {
 }
 
 /* Utilities */
-function GET(_path, _headers) {
+Web.get = function(_path, _headers, _expectedCode) {
+    if (!_expectedCode) _expectedCode = 200;
+
     var deferred = Q.defer();
     var headers = authHeader;
 
@@ -204,7 +205,7 @@ function GET(_path, _headers) {
     };
 
     request(reqOptions, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode == _expectedCode) {
             deferred.resolve(JSON.parse(body));
         } else {
             deferred.reject(body);
