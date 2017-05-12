@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "castnow": "^0.4.17",
+    "pirata": "0.0.4",
     "q": "^1.4.1",
     "request": "^2.79.0",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "unrar": "^0.1.6"
   }
 }
